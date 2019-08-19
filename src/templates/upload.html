@@ -2,18 +2,26 @@
 <html>
 <head>
 <title>Upload</title>
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+ <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 </head>
 <body>
 
-<form id="upload-form" action="{{ url_for('upload') }}" method="POST" enctype="multipart/form-data">
+    <form id="upload-form" action="{{ url_for('upload') }}" method="POST" enctype="multipart/form-data">
 
-    <strong>Files:</strong><br>
-    <input id="file-picker" type="file" name="file" accept="" multiple>
-    <div id="msg"></div>
-    <input type="submit" value="Upload!" id="upload-button">
-</form>
+        <strong>Files:</strong><br>
+        <input id="file-picker" type="file" name="file" accept=".pdf" multiple="multiple">
+        <div id="msg"></div>
+        <input id="signature-picker" type="file" name="signature" accept=".pdf" multiple="multiple">
+        <div id="msg"></div>
+        <input type="submit" value="Upload!" id="upload-button" onclick="$('#loading').show();">
+        
+    </form>
+    
 </body>
+
+<div id="loading">
+    <img id="loading-image" src="loading.gif" alt="Loading..." />
+</div>
 <script>
 
     $("#file-picker").change(function(){
@@ -23,18 +31,20 @@
         for (var i=0; i<input.files.length; i++)
         {
         //koala.jpg, koala.JPG substring(index) lastIndexOf('a') koala.1.jpg
-            var ext= input.files[i].name.substring(input.files[i].name.lastIndexOf('.')+1).toLowerCase()
-            
-            //if ((ext == 'jpg') || (ext == 'png'))
-            //{
-            //    $("#msg").text("Files are supported")
-            //    document.getElementById("file-picker").value = "";
-            //}
-            //else
-            //{
-            //    $("#msg").text("Files are NOT supported")
-                
-            //}
+            var ext= input.files[i].name.substring(input.files[i].name.lastIndexOf('.')+1).toLowerCase() 
+
+        }
+
+
+    });
+    $("#signature-picker").change(function(){
+
+        var input = document.getElementById('signature-picker');
+
+        for (var i=0; i<input.files.length; i++)
+        {
+        //koala.jpg, koala.JPG substring(index) lastIndexOf('a') koala.1.jpg
+            var ext= input.files[i].name.substring(input.files[i].name.lastIndexOf('.')+1).toLowerCase() 
 
         }
 

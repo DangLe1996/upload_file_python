@@ -7,10 +7,17 @@ import pprint
 # [START storage_upload_file]
 from google.cloud import storage
 
+__author__ = 'Dang'
+
+app = Flask(__name__)
+
+APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 def upload_blob(bucket_name, source_file_name, destination_blob_name):
     """Uploads a file to the bucket."""
-    storage_client = storage.Client.from_service_account_json('pdf-sign-250300-eef8d28a7e4c.json')
+    filename = 'pdf-sign-250300-12671501c960.json'
+    destination = "/".join([APP_ROOT, filename])
+    storage_client = storage.Client.from_service_account_json(destination)
     bucket = storage_client.get_bucket(bucket_name)
     blob = bucket.blob(destination_blob_name)
 
@@ -21,11 +28,6 @@ def upload_blob(bucket_name, source_file_name, destination_blob_name):
         destination_blob_name))
 
 
-__author__ = 'Dang'
-
-app = Flask(__name__)
-
-APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 @app.route("/")
 def index():
@@ -42,6 +44,15 @@ def upload():
     for file in request.files.getlist("file"):
         print(file)
         filename = file.filename
+        destination = "/".join([target, filename])
+        print("Accept incoming file:", filename)
+        print("Save it to:", destination)
+        file.save(destination)
+        upload_blob('file-input-kpmg',destination,filename)
+        print('finish')
+    for file in request.files.getlist("signature"):
+        print(file)
+        filename = 'signature.pdf'
         destination = "/".join([target, filename])
         print("Accept incoming file:", filename)
         print("Save it to:", destination)

@@ -11,7 +11,7 @@
         <strong>Files:</strong><br>
         <input id="file-picker" type="file" name="file" accept=".pdf" multiple="multiple">
         <div id="msg"></div>
-        <input id="signature-picker" type="file" name="signature" accept=".pdf" multiple="multiple">
+        <input id="signature-picker" type="file" name="signature" accept="image/png, image/jpeg" multiple="multiple">
         <div id="msg"></div>
         <input type="submit" value="Upload!" id="upload-button" onclick="$('#loading').show();">
         
@@ -19,9 +19,7 @@
     
 </body>
 
-<div id="loading">
-    <img id="loading-image" src="loading.gif" alt="Loading..." />
-</div>
+
 <script>
 
     $("#file-picker").change(function(){

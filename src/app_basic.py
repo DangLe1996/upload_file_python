@@ -3,6 +3,7 @@ from flask import Flask, render_template, request
 import argparse
 import datetime
 import pprint
+import shutil
 
 # [START storage_upload_file]
 from google.cloud import storage
@@ -12,10 +13,10 @@ __author__ = 'Dang'
 app = Flask(__name__)
 
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
-
+bucket_name = 'file-input-kpmg'
 def upload_blob(bucket_name, source_file_name, destination_blob_name):
     """Uploads a file to the bucket."""
-    filename = 'pdf-sign-250300-12671501c960.json'
+    filename = 'key.json'
     destination = "/".join([APP_ROOT, filename])
     storage_client = storage.Client.from_service_account_json(destination)
     bucket = storage_client.get_bucket(bucket_name)
@@ -27,6 +28,8 @@ def upload_blob(bucket_name, source_file_name, destination_blob_name):
         source_file_name,
         destination_blob_name))
 
+def download_blob(bucket_name, source_file_name, destination_blob_name):
+    blobs = storage_client.list_blobs(bucket_name)
 
 
 @app.route("/")
@@ -59,7 +62,13 @@ def upload():
         file.save(destination)
         upload_blob('file-input-kpmg',destination,filename)
         print('finish')
+    shutil.rmtree(target)
     return render_template("complete.html")
 
+
+app.route("/download", methods=['GET'])
+def download():
+    
+    return render_template("complete.html")
 if __name__ == "__main__":
     app.run(port=4555, debug=False)

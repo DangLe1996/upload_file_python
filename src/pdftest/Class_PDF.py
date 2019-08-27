@@ -1,6 +1,8 @@
 import pickle
 from fpdf import FPDF
 from PyPDF2 import PdfFileWriter,PdfFileReader
+import os
+from pathlib import Path
 class PDF:
     watermark_file = "tuto3.pdf"
     def __init__(self, name, signature, date):
@@ -47,7 +49,10 @@ class PDF:
 
     @classmethod
     def import_location(cls,name):
-        with open('obj/' + name + '.pkl', 'rb') as f:
+        data_folder = Path("src/pdftest/")
+        filepath = data_folder / "locations_data.pkl"
+      
+        with open(filepath, 'rb') as f:
             return pickle.load(f)
     pass
 

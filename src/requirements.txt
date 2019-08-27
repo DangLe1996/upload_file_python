@@ -1,2 +1,4 @@
-flask
-google-cloud-storage
+flask == 1.0.2
+google-cloud-storage == 1.18.0
+fpdf == 1.7.2
+PyPDF2 == 1.26.0

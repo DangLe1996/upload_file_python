@@ -1,9 +1,11 @@
 import os
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request,send_file,Response
 import argparse
 import datetime
 import pprint
 import shutil
+import sys
+import zipfile
 
 # [START storage_upload_file]
 from google.cloud import storage
@@ -13,6 +15,14 @@ __author__ = 'Dang'
 app = Flask(__name__)
 
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
+
+sys.path.insert(0, "/".join([APP_ROOT, 'pdftest']))
+
+import main
+filename = 'key.json'
+destination = "/".join([APP_ROOT, filename])
+storage_client = storage.Client.from_service_account_json(destination)
+
 bucket_name = 'file-input-kpmg'
 def upload_blob(bucket_name, source_file_name, destination_blob_name):
     """Uploads a file to the bucket."""
@@ -30,7 +40,6 @@ def upload_blob(bucket_name, source_file_name, destination_blob_name):
 
 def download_blob(bucket_name, source_file_name, destination_blob_name):
     blobs = storage_client.list_blobs(bucket_name)
-
 
 @app.route("/")
 def index():
@@ -55,20 +64,44 @@ def upload():
         print('finish')
     for file in request.files.getlist("signature"):
         print(file)
-        filename = 'signature.pdf'
+        filename = 'signature.png'
         destination = "/".join([target, filename])
         print("Accept incoming file:", filename)
         print("Save it to:", destination)
         file.save(destination)
         upload_blob('file-input-kpmg',destination,filename)
         print('finish')
+    main.main(bucket_name)
     shutil.rmtree(target)
-    return render_template("complete.html")
+    return render_template("downloads.html")
 
 
-app.route("/download", methods=['GET'])
-def download():
-    
-    return render_template("complete.html")
-if __name__ == "__main__":
-    app.run(port=4555, debug=False)
+@app.route('/file-downloads/')
+def file_downloads():
+	try:
+		return render_template('downloads.html')
+	except Exception as e:
+		return str(e)
+@app.route('/return-files/')
+def return_files_tut():
+    try:
+        bucket = storage_client.get_bucket(bucket_name)
+        blobs = storage_client.list_blobs(bucket_name)
+        for blob in blobs:
+            if blob.content_type == 'application/x-zip-compressed':
+                blob.download_to_filename(blob.name)
+                return  send_file(blob.name,as_attachment=True, attachment_filename=blob.name)
+        return 
+    except Exception as e:
+        return str(e)
+
+def delete_blob(bucket_name, blob_name):
+    """Deletes a blob from the bucket."""
+    storage_client = storage.Client()
+    bucket = storage_client.get_bucket(bucket_name)
+    blob = bucket.blob(blob_name)
+
+    blob.delete()
+
+if __name__ == '__main__':
+    app.run()

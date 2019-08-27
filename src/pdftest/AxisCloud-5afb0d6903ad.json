@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "axiscloud",
+  "private_key_id": "5afb0d6903adaf62f5b890264fc9a698ac122f9e",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDMJ4ue5yk907vp\nog2IITJ7WuKWNdYKjsduOyuYUhwKberYC/W/0Uq874I79nOccR1AWFkJQlWhkGp3\nbhN/BW2Kwq5tcGe41rpfEY0vkiyeGqw7b7X1shM10wv8W+s9fPl1n+MMZwvU4yMI\niFHq+lUGBCZatqcUHtk/3WXfqcSSgAvBu6YtjNiy+Tu8ht6YZru1oSdTHPh1fEl+\nd9T4KPvc9THzJCPjOQy2agW+dRNZT67h28ay19XXVyoTgO1D0FMfeC4xhgFXTEnd\nODq000PxKovw+rjDV7E0fo0ktHS7a09q8xnBUuuKTdwL02mIhHHx/6PEaGvXPk8y\nukrN05kjAgMBAAECggEAVc0C9YgygY0Uy0azyDQnisdyNm4u5GYIdBADLPPJXCrB\nCgbQxEq6TfidNAVKpoO1pv7agLUz1wCidko5gGdwF+LlOxKETR9V2bG/NDCLdvE/\n1IUJJNcwEq19upSJI+D72M8XNfWy98h0R1g/kXGfPTWORw6/3oluhdRPRfaMKoNM\nvklNgguMX1Qg5ZkWYlvKQcihVfQvZWhd1ITC6xRskZKWvuTacjt7gsQsE4MG8lk2\nobuAAC8pRDTAGGsdd8iTA5Jy/E634N/rhV35+M9lBhfdr223BcSHdXmaAQqTkSdm\nhxqghRfW8NXCBVKresIyumKkLY0+eNJWcUZHep4FPQKBgQDxHUqxwUbSwZqARiE+\nUAajrhfddPcpDGr3NsHokv9iIUaPLNdEr5xd2sLLhvalfTfip9ZTwvKTkLCBD/DQ\n8UwtWNLTyPQpesvIfPGs8jvZgKHPF7bamz6YfqaNLQTDT3jSxbDBucbgsqu8HOao\njJAbYX2YXEOxbz22Dbtk3PQ/vQKBgQDYwh4nKZTEG3DrVyY+QVtCfEsfNdvQdueR\nnPebgfB8MOIJFmALBOruJCXT5wWnUZ1HgNayLwazV+yq2kZ6FcboCWAU3/C2xb8d\nBGoexx57vvAfCVm+Gud3jz0rY7uaUX20szCkPJ1aU4jylKDIiVuNbbFCbFOgnk1L\nBi2XQp3aXwKBgQDshtGZYoK5iRapMyK1YAfDVasvoeg8KmRcMykxn9JLT11KYrCi\nPqtkHo/s3G7klNvXytGjxZ/1RoD/esXAEpWp/nKDM6ThdAaonHjwMYioq1kQMLE9\n7gEP015LK5h6iGF8UlY9FKOWFXAGz0sumQVc9twgNJJrYzbkesAUB/TK+QKBgEz9\ndhRW8p5NWOhehhjqwe11lIE7ch4zfcD8zf4QQ0j5W+/6YJbJYmC/uifwENQDayfw\nnVGg3nJpMojlCs9mWMYmPlhrymZBCsbVwJO6ChvOECAWBChACiMvX3y/6ezAMTQz\nyX0sgn+I2EXBgPJ5x2kOoz2CmJmeYLnbMepeIQ9lAoGBAOE4JImIJXB6e2PAxWtu\nL+Y50UAQdNB88cNqBd2Z+j+doL/UWudM2XmyiRi7cUnykz/V3TN0gTp3TYNHgwsd\nmHjTgaV/bGGK6D7aQRJCpCoil544cgiAQXkEpaNcshwkmN4BrGQzM5dtUQrlEXdn\nxtZs1bWQ0JvRTfbNdtEszkcb\n-----END PRIVATE KEY-----\n",
+  "client_email": "owner-277@axiscloud.iam.gserviceaccount.com",
+  "client_id": "113171002667801569423",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/owner-277%40axiscloud.iam.gserviceaccount.com"
+}

@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 </head>
 {% block body %}
 <body class="body">
     <div class="container" align="left">
-        <a href="/return-files/" target="blank"><button class='btn btn-default'>Download!</button></a>
+        <a href="{{ url_for('return_files') }}"><button class='btn btn-default'>Download!</button></a>
     </div>
+   
 </body>
 {% endblock %}
 </html>

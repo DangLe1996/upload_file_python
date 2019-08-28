@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request,send_file,Response
+from flask import Flask, render_template, request,send_file,Response,url_for
 import argparse
 import datetime
 import pprint
@@ -12,7 +12,7 @@ from google.cloud import storage
 
 __author__ = 'Dang'
 
-app = Flask(__name__)
+app = Flask(__name__,template_folder="templates")
 
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 
@@ -82,15 +82,19 @@ def file_downloads():
 		return render_template('downloads.html')
 	except Exception as e:
 		return str(e)
-@app.route('/return-files/')
-def return_files_tut():
+@app.route('/return-files/' ,methods=['GET', 'POST'])
+def return_files():
+    x = 1
     try:
         bucket = storage_client.get_bucket(bucket_name)
         blobs = storage_client.list_blobs(bucket_name)
         for blob in blobs:
             if 'zip' in blob.content_type :
-                blob.download_to_filename("/".join([APP_ROOT, blob.name]))
-                return send_file("/".join([APP_ROOT, blob.name]),as_attachment=True, attachment_filename=blob.name)
+                destination_uri = "/".join([APP_ROOT, blob.name])
+                blob.download_to_filename(destination_uri)
+                print('Exported {} to {}'.format(
+                        blob.name, destination_uri))
+                return send_file(destination_uri,as_attachment=True, attachment_filename=blob.name)
     except Exception as e:
         return str(e)
 

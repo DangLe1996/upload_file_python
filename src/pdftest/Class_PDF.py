@@ -49,9 +49,9 @@ class PDF:
 
     @classmethod
     def import_location(cls,name):
-        data_folder = Path("src/pdftest/")
-        filepath = data_folder / "locations_data.pkl"
-      
+        name = name + '.pkl'
+        APP_ROOT = os.path.dirname(os.path.abspath(__file__))
+        filepath =  "/".join([APP_ROOT,name])
         with open(filepath, 'rb') as f:
             return pickle.load(f)
     pass

@@ -9,6 +9,12 @@ import zipfile
 
 # [START storage_upload_file]
 from google.cloud import storage
+try:
+  import googleclouddebugger
+  googleclouddebugger.enable()
+except ImportError:
+  pass
+
 
 __author__ = 'Dang'
 
@@ -21,7 +27,11 @@ sys.path.insert(0, "/".join([APP_ROOT, 'pdftest']))
 import main
 filename = 'key.json'
 destination = "/".join([APP_ROOT, filename])
-storage_client = storage.Client.from_service_account_json(destination)
+if os.getenv('GAE_ENV', '').startswith('standard'):
+  storage_client = storage.Client()
+else:
+  storage_client = storage.Client.from_service_account_json(destination)
+
 
 bucket_name = 'file-input-kpmg'
 def upload_blob(bucket_name, source_file_name, destination_blob_name):
@@ -60,7 +70,7 @@ def upload():
         print("Accept incoming file:", filename)
         print("Save it to:", destination)
         file.save(destination)
-        upload_blob('file-input-kpmg',destination,filename)
+        #upload_blob('file-input-kpmg',destination,filename)
         print('finish')
     for file in request.files.getlist("signature"):
         print(file)
@@ -69,9 +79,9 @@ def upload():
         print("Accept incoming file:", filename)
         print("Save it to:", destination)
         file.save(destination)
-        upload_blob('file-input-kpmg',destination,filename)
+        #upload_blob('file-input-kpmg',destination,filename)
         print('finish')
-    main.main(bucket_name)
+    main.main2(target)
     shutil.rmtree(target)
     return render_template("downloads.html")
 

@@ -46,6 +46,25 @@ def main(bucket_name):
     blob = bucket.blob(zip.filename)
     blob.upload_from_filename(zip.filename)
 
+def main2(folder_name):
+    list_of_file = []
+    bucket_name = 'file-input-kpmg'
+    bucket = storage_client.get_bucket(bucket_name)
+    zip = zipfile.ZipFile('return.zip', 'w')
+    for file in os.listdir(folder_name):
+        if file.endswith(".pdf"):
+            list_of_file.append(file)
+        elif file.endswith(".png"):
+            file = signature
+    for i in list_of_file:
+        output_file = sign_document(i,signature)
+        zip.write(output_file,compress_type=zipfile.ZIP_DEFLATED)
+        #blob = bucket.blob(output_file)
+        #blob.upload_from_filename(output_file)
+    zip.close()
+    blob = bucket.blob(zip.filename)
+    blob.upload_from_filename(zip.filename)
+
 
 
 #def download_blob(bucket_name, source_blob_name, destination_file_name):

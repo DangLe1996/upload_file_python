@@ -88,10 +88,10 @@ def return_files_tut():
         bucket = storage_client.get_bucket(bucket_name)
         blobs = storage_client.list_blobs(bucket_name)
         for blob in blobs:
-            if blob.content_type == 'application/x-zip-compressed':
+            if blob.content_type == 'application/zip':
                 blob.download_to_filename(blob.name)
                 return  send_file(blob.name,as_attachment=True, attachment_filename=blob.name)
-        return 
+        return render_template('complete.html')
     except Exception as e:
         return str(e)
 
